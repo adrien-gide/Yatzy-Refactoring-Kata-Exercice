@@ -1,100 +1,67 @@
+import java.util.*;
+
 public class Yatzy {
+    protected List<Integer> dice;
 
-    public static int chance(int d1, int d2, int d3, int d4, int d5)
+    public Yatzy(int d1, int d2, int d3, int d4, int d5){
+        dice = new ArrayList<>(Arrays.asList(d1, d2, d3, d4, d5));
+    }
+    public Yatzy(List<Integer> dice){
+        this.dice = dice;
+    }
+
+    /**
+     * @return sum of all dice
+     */
+    public int chance()
     {
-        int total = 0;
-        total += d1;
-        total += d2;
-        total += d3;
-        total += d4;
-        total += d5;
-        return total;
+        return this.dice.stream().reduce(0, Integer::sum);
     }
 
-    public static int yatzy(int... dice)
+    /**
+     * Checks if all dice are equal and return yatzy score
+     *
+     * @return 50 if it's a yatzy, else 0
+     */
+    public int yatzy()
     {
-        int[] counts = new int[6];
-        for (int die : dice)
-            counts[die-1]++;
-        for (int i = 0; i != 6; i++)
-            if (counts[i] == 5)
-                return 50;
-        return 0;
+        // Transforming List into a set to ensure all list elements are equal
+        // If set size is not 1, it's not a yatzy
+        return new HashSet<Integer>(this.dice).size() != 1 ? 50 : 0;
     }
 
-    public static int ones(int d1, int d2, int d3, int d4, int d5) {
-        int sum = 0;
-        if (d1 == 1) sum++;
-        if (d2 == 1) sum++;
-        if (d3 == 1) sum++;
-        if (d4 == 1) sum++;
-        if (d5 == 1) 
-            sum++;
 
-        return sum;
+    /**
+     * Private method calculating score for occurencies of specific die value
+     * @param value die value
+     * @return score (occurences * value)
+     */
+    private int sum_of_specific_value(int value) {
+        return Collections.frequency(dice, value) * value;
     }
 
-    public static int twos(int d1, int d2, int d3, int d4, int d5) {
-        int sum = 0;
-        if (d1 == 2) sum += 2;
-        if (d2 == 2) sum += 2;
-        if (d3 == 2) sum += 2;
-        if (d4 == 2) sum += 2;
-        if (d5 == 2) sum += 2;
-        return sum;
+    public int ones() {
+        return this.sum_of_specific_value(1);
     }
 
-    public static int threes(int d1, int d2, int d3, int d4, int d5) {
-        int s;    
-        s = 0;
-        if (d1 == 3) s += 3;
-        if (d2 == 3) s += 3;
-        if (d3 == 3) s += 3;
-        if (d4 == 3) s += 3;
-        if (d5 == 3) s += 3;
-        return s;
+    public int twos() {
+        return this.sum_of_specific_value(2);
     }
 
-    protected int[] dice;
-    public Yatzy(int d1, int d2, int d3, int d4, int _5)
-    {
-        dice = new int[5];
-        dice[0] = d1;
-        dice[1] = d2;
-        dice[2] = d3;
-        dice[3] = d4;
-        dice[4] = _5;
+    public int threes() {
+        return this.sum_of_specific_value(3);
     }
 
-    public int fours()
-    {
-        int sum;    
-        sum = 0;
-        for (int at = 0; at != 5; at++) {
-            if (dice[at] == 4) {
-                sum += 4;
-            }
-        }
-        return sum;
+    public int fours(){
+        return this.sum_of_specific_value(4);
     }
 
-    public int fives()
-    {
-        int s = 0;
-        int i;
-        for (i = 0; i < dice.length; i++) 
-            if (dice[i] == 5)
-                s = s + 5;
-        return s;
+    public int fives(){
+        return this.sum_of_specific_value(5);
     }
 
-    public int sixes()
-    {
-        int sum = 0;
-        for (int at = 0; at < dice.length; at++) 
-            if (dice[at] == 6)
-                sum = sum + 6;
-        return sum;
+    public int sixes(){
+        return this.sum_of_specific_value(6);
     }
 
     public static int score_pair(int d1, int d2, int d3, int d4, int d5)
