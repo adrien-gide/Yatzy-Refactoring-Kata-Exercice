@@ -10,6 +10,15 @@ public class Yatzy {
         this.dice = dice;
     }
 
+    // Setters
+    public void setDice(List<Integer> dice) {
+        this.dice = dice;
+    }
+
+    public void setDice(int d1, int d2, int d3, int d4, int d5) {
+        this.dice = new ArrayList<>(Arrays.asList(d1, d2, d3, d4, d5));;
+    }
+
     /**
      * @return sum of all dice
      */
@@ -27,7 +36,7 @@ public class Yatzy {
     {
         // Transforming List into a set to ensure all list elements are equal
         // If set size is not 1, it's not a yatzy
-        return new HashSet<Integer>(this.dice).size() != 1 ? 50 : 0;
+        return new HashSet<>(this.dice).size() == 1 ? 50 : 0;
     }
 
 
