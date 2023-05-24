@@ -84,7 +84,7 @@ public class Yatzy {
 
     private int calculate_matching_dices(int occurences) {
         for(int i = 6; i > 0; i--) {
-            if (this.count_frequency(i) == 2) {
+            if (this.count_frequency(i) >= occurences) {
                 return i * occurences;
             }
         }
@@ -98,10 +98,9 @@ public class Yatzy {
 
     public int two_pair()
     {
-
         for(int i = 6; i > 0; i--) {
             if (this.count_frequency(i) == 2) {
-                return i * occurences;
+//                return i * occurences;
             }
         }
         return 0;

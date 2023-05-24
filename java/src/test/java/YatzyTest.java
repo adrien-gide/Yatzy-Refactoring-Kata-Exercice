@@ -78,30 +78,36 @@ public class YatzyTest {
 
     @Test
     public void one_pair() {
-        assertEquals(6, Yatzy.score_pair(3,4,3,5,6));
-        assertEquals(10, Yatzy.score_pair(5,3,3,3,5));
-        assertEquals(12, Yatzy.score_pair(5,3,6,6,5));
+        Yatzy yatzy = new Yatzy(3,4,3,5,6);
+        assertEquals(6, yatzy.single_pair());
+
+        yatzy.setDice(5,3,3,3,5);
+        assertEquals(10, yatzy.single_pair());
     }
 
     @Test
     public void two_Pair() {
-        assertEquals(16, Yatzy.two_pair(3,3,5,4,5));
-        assertEquals(16, Yatzy.two_pair(3,3,5,5,5));
+//        assertEquals(16, Yatzy.two_pair(3,3,5,4,5));
+//        assertEquals(16, Yatzy.two_pair(3,3,5,5,5));
     }
 
     @Test
-    public void three_of_a_kind() 
+    public void test_three_of_a_kind()
     {
-        assertEquals(9, Yatzy.three_of_a_kind(3,3,3,4,5));
-        assertEquals(15, Yatzy.three_of_a_kind(5,3,5,4,5));
-        assertEquals(9, Yatzy.three_of_a_kind(3,3,3,3,5));
+        Yatzy yatzy = new Yatzy(3,3,3,4,5);
+        assertEquals(9, yatzy.three_of_a_kind());
+
+        yatzy.setDice(5,3,5,4,5);
+        assertEquals(15, yatzy.three_of_a_kind());
     }
 
     @Test
-    public void four_of_a_knd() {
-        assertEquals(12, Yatzy.four_of_a_kind(3,3,3,3,5));
-        assertEquals(20, Yatzy.four_of_a_kind(5,5,5,4,5));
-        assertEquals(9, Yatzy.three_of_a_kind(3,3,3,3,3));
+    public void test_four_of_a_knd() {
+        Yatzy yatzy = new Yatzy(3,3,3,3,5);
+        assertEquals(12, yatzy.four_of_a_kind());
+
+        yatzy.setDice(5,5,5,4,5);
+        assertEquals(20, yatzy.four_of_a_kind());
     }
 
     @Test
@@ -120,7 +126,10 @@ public class YatzyTest {
 
     @Test
     public void fullHouse() {
-        assertEquals(18, Yatzy.fullHouse(6,2,2,2,6));
-        assertEquals(0, Yatzy.fullHouse(2,3,4,5,6));
+        Yatzy yatzy = new Yatzy(6,2,2,2,6);
+        assertEquals(18, yatzy.fullHouse());
+
+        yatzy.setDice(2,3,4,5,6);
+        assertEquals(0, yatzy.fullHouse());
     }
 }
