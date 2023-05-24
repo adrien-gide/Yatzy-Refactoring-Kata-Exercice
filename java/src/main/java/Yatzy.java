@@ -82,6 +82,11 @@ public class Yatzy {
         return this.sum_of_specific_value(6);
     }
 
+    /**
+     * Calculate matching dices
+     * @param occurences
+     * @return
+     */
     private int calculate_matching_dices(int occurences) {
         for(int i = 6; i > 0; i--) {
             if (this.count_frequency(i) >= occurences) {
@@ -96,14 +101,17 @@ public class Yatzy {
         return this.calculate_matching_dices(2);
     }
 
-    public int two_pair()
+    public int two_pairs()
     {
+        int times = 0;
+        int score = 0;
         for(int i = 6; i > 0; i--) {
-            if (this.count_frequency(i) == 2) {
-//                return i * occurences;
+            if (this.count_frequency(i) >= 2) {
+                times ++;
+                score += i * 2;
             }
         }
-        return 0;
+        return times == 2 ? score : 0;
     }
 
     public  int three_of_a_kind()
